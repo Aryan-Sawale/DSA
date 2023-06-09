@@ -1,0 +1,385 @@
+1. Vector:
+- `std::vector` is a dynamic array that allows efficient random access to elements.
+- It provides constant-time access to individual elements by their index.
+- Elements can be added or removed at the end in amortized constant time.
+- Insertion or removal of elements at the beginning or middle requires shifting subsequent elements, resulting in linear time complexity.
+- It provides contiguous memory storage, which can result in efficient cache utilization.
+
+2. Map:
+- `std::map` is an associative container that stores key-value pairs sorted by key.
+- It allows efficient lookup, insertion, and deletion of elements based on the key.
+- The elements are ordered according to a strict weak ordering criterion based on the keys.
+- The time complexity of operations like `find()`, `insert()`, and `erase()` is logarithmic (O(log n)).
+
+3. Unordered_map:
+- `std::unordered_map` is an associative container that stores key-value pairs with fast lookup based on the key.
+- It uses a hash table to store elements, providing average constant-time complexity for lookup, insertion, and deletion.
+- The order of elements is not guaranteed and may vary based on the hash values of the keys.
+- Hash functions and collision resolution strategies can impact performance.
+
+4. Set:
+- `std::set` is an associative container that stores unique elements in a sorted order.
+- It provides efficient operations for element insertion, removal, and finding elements based on their value.
+- The elements are ordered according to a strict weak ordering criterion based on their values.
+- The time complexity of operations like `find()`, `insert()`, and `erase()` is logarithmic (O(log n)).
+
+5. Unordered_set:
+- `std::unordered_set` is an associative container that stores unique elements with fast lookup based on their value.
+- It uses a hash table to store elements, providing average constant-time complexity for lookup, insertion, and deletion.
+- The order of elements is not guaranteed and may vary based on the hash values.
+- Hash functions and collision resolution strategies can impact performance.
+
+6. Priority_queue:
+- `std::priority_queue` is a container adapter that provides a priority-based queue.
+- It allows insertion of elements with associated priorities and retrieves the highest-priority element.
+- By default, it provides a max heap, but it can be customized to behave as a min heap.
+- The underlying data structure maintains the highest (or lowest) priority element at the top, allowing efficient retrieval in logarithmic time (O(log n)).
+
+The choice between using a priority queue and sorting depends on the specific requirements and constraints of your problem. Here are some points to consider:
+
+Priority Queue:
+- A priority queue is useful when you need to maintain a dynamically changing collection of elements in a specific order based on their priorities.
+- It allows efficient insertion and retrieval of the highest-priority (or lowest-priority) element.
+- If you need to access the elements in a partially sorted order while performing other operations, a priority queue can be more efficient.
+- The time complexity for insertion and retrieval of the highest-priority element is logarithmic (O(log n)).
+
+Sorting:
+- Sorting is suitable when you need to obtain a completely sorted order of all elements in one operation.
+- If you need to process all elements in a specific sorted order at once, sorting can be more efficient.
+- Sorting the entire collection has a time complexity of O(n log n), where n is the number of elements.
+- If you need to perform multiple operations on the sorted elements, sorting once and then accessing them in order might be more efficient.
+
+In summary, if your primary requirement is maintaining a dynamic collection with efficient insertion and retrieval of the highest-priority element, a priority queue is a good choice. On the other hand, if your goal is to obtain a completely sorted order of all elements in one operation and you do not require dynamic updates, sorting the elements may be more suitable. Consider the trade-offs between time complexity, memory usage, and the specific needs of your problem to make an informed decision.
+
+--------------------------------------------------------------------
+in cpp, binary_search only returns a boolean
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> numbers = {1, 3, 5, 7, 9, 11, 13, 15};
+
+    int target = 7;
+    bool found = std::binary_search(numbers.begin(), numbers.end(), target);
+
+    if (found) {
+        std::cout << "Target found in the vector." << std::endl;
+    } else {
+        std::cout << "Target not found in the vector." << std::endl;
+    }
+
+    return 0;
+}
+
+--------------------------------------------------------------------
+if you want the index as well, use lower_bound
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> numbers = {1, 3, 5, 7, 9, 11, 13, 15};
+
+    int target = 7;
+    auto it = std::lower_bound(numbers.begin(), numbers.end(), target);
+
+    if (it != numbers.end() && *it == target) {
+        std::cout << "Target found in the vector." << std::endl;
+    } else {
+        std::cout << "Target not found in the vector." << std::endl;
+    }
+
+    return 0;
+}
+
+--------------------------------------------------------------------
+find() is O(n) on vectors, O(logn) on map and set, O(1) on unordered_map and unordered_set
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> numbers = {10, 20, 30, 40, 50};
+
+    int target = 30;
+    auto it = std::find(numbers.begin(), numbers.end(), target);
+
+    if (it != numbers.end()) {
+        std::cout << "Target found at index: " << std::distance(numbers.begin(), it) << std::endl;
+    } else {
+        std::cout << "Target not found in the vector." << std::endl;
+    }
+
+    return 0;
+}
+--------------------------------------------------------------------
+Priority queue normal declaration:
+priority_queue<int> pq
+
+Priority queue with comparator declaration:
+priority_queue<int, vector<int>, greater<int> > gq
+
+--------------------------------------------------------------------
+In priority_queue, the comparators work in reverse because of this:
+Note that the Compare parameter is defined such that it returns true if its first argument comes before its second argument in a weak ordering.
+But because the priority queue outputs largest elements first, the elements that "come before" are actually output last. 
+That is, the front of the queue contains the "last" element according to the weak ordering imposed by Compare.
+
+So if you want ascending you would actually write A.price > B.price return true;
+In normal std::sort you would write A.price < B.price return true; for ascending
+
+class Compare {
+public:
+	bool operator()(obj A, obj B)
+	{
+
+	}
+};
+
+we can't use function comparators with priority_queue unfortunately
+
+e.g
+// C++ Program to implement
+// Custom Comparator in Priority Queue
+#include <iostream>
+#include <queue>
+#define PII pair<int, int>
+
+// Pair of Ints = PII
+using namespace std;
+
+// based on first part in ascending and second part in
+// descending first basis
+class Compare {
+public:
+	bool operator()(PII below, PII above)
+	{
+		if (below.first > above.first) {
+			return true;
+		}
+		else if (below.first == above.first
+				&& below.second < above.second) {
+			return true;
+		}
+
+		return false;
+	}
+};
+
+int main()
+{
+	priority_queue<PII, vector<PII>, Compare> ds;
+	ds.push({ 100, 11 });
+	ds.push({ 100, 41 });
+	ds.push({ 100, 21 });
+	ds.push({ 300, 1 });
+	ds.push({ 300, 2 });
+	ds.push({ 1, 1 });
+	ds.push({ 1, 2 });
+	ds.push({ 1, 20 });
+
+	cout << "The priority queue is : \n";
+	while (!ds.empty()) {
+		cout << ds.top().first << " " << ds.top().second
+			<< "\n";
+		ds.pop(); // heapify happens
+	}
+
+	return 0;
+}
+--------------------------------------------------------------------
+Function vs class comparators for std::sort. Both can be used.
+True => keep order
+False => swap order
+
+// FUNCTION Comparator
+// const obj& returns a reference to const obj which makes it so that there aren't unnecessary copies being made.
+bool compareByAge(const Person& a, const Person& b) {
+    return a.age < b.age;
+}
+
+int main() {
+    std::vector<Person> people = { /* populate the vector */ };
+
+    std::sort(people.begin(), people.end(), compareByAge);
+
+    // Rest of the code
+}
+
+// CLASS comparator
+class AgeComparator {
+public:
+    bool operator()(const Person& a, const Person& b) const {
+        return a.age < b.age;
+    }
+};
+
+std::vector<Person> people = { /* populate the vector */ };
+std::sort(people.begin(), people.end(), AgeComparator());
+--------------------------------------------------------------------
+In C++, there are multiple ways to use the `find()` function to search for an element in a container. The `find()` function is commonly used with sequential containers like `std::vector`, `std::list`, `std::deque`, and associative containers like `std::set`, `std::map`, etc. Here are several ways to use the `find()` function:
+
+1. Using `std::find()` algorithm:
+   ```cpp
+   #include <algorithm>
+   #include <vector>
+
+   int main() {
+       std::vector<int> vec = {1, 2, 3, 4, 5};
+
+       // Using std::find()
+       auto it = std::find(vec.begin(), vec.end(), 3);
+       if (it != vec.end()) {
+           std::cout << "Element found at index: " << std::distance(vec.begin(), it) << std::endl;
+       } else {
+           std::cout << "Element not found" << std::endl;
+       }
+
+       return 0;
+   }
+   ```
+
+2. Using member function `container.find()` for associative containers:
+   ```cpp
+   #include <set>
+
+   int main() {
+       std::set<int> mySet = {1, 2, 3, 4, 5};
+
+       // Using container.find()
+       auto it = mySet.find(3);
+       if (it != mySet.end()) {
+           std::cout << "Element found" << std::endl;
+       } else {
+           std::cout << "Element not found" << std::endl;
+       }
+
+       return 0;
+   }
+   ```
+
+3. Using `std::find_if()` algorithm with a predicate:
+   ```cpp
+   #include <algorithm>
+   #include <vector>
+
+   bool isEven(int num) {
+       return num % 2 == 0;
+   }
+
+   int main() {
+       std::vector<int> vec = {1, 2, 3, 4, 5};
+
+       // Using std::find_if() with a predicate
+       auto it = std::find_if(vec.begin(), vec.end(), isEven);
+       if (it != vec.end()) {
+           std::cout << "First even element found at index: " << std::distance(vec.begin(), it) << std::endl;
+       } else {
+           std::cout << "No even element found" << std::endl;
+       }
+
+       return 0;
+   }
+   ```
+
+4. Using lambda function with `std::find_if()`:
+   ```cpp
+   #include <algorithm>
+   #include <vector>
+
+   int main() {
+       std::vector<int> vec = {1, 2, 3, 4, 5};
+
+       // Using std::find_if() with lambda function
+       auto it = std::find_if(vec.begin(), vec.end(), [](int num) {
+           return num > 3;
+       });
+       if (it != vec.end()) {
+           std::cout << "First element greater than 3 found at index: " << std::distance(vec.begin(), it) << std::endl;
+       } else {
+           std::cout << "No element greater than 3 found" << std::endl;
+       }
+
+       return 0;
+   }
+   ```
+
+These examples demonstrate different ways to use the `find()` function in C++. The first two examples show the basic usage of `std::find()`
+for sequential and associative containers, respectively. The third and fourth examples illustrate the usage of `std::find_if()` with a 
+predicate function and a lambda function, allowing you to define custom search conditions.
+
+--------------------------------------------------------------------
+Adding priority_queue elements in a vector (same approach can be used for printing)
+
+ std::priority_queue<int> pq;
+    pq.push(3);
+    pq.push(1);
+    pq.push(4);
+    pq.push(2);
+
+    std::vector<int> vec;
+
+    // Add elements from priority queue to vector
+    while (!pq.empty()) {
+        vec.push_back(pq.top());
+        pq.pop();
+    }
+
+    // Print the elements in the vector
+    for (const auto& num : vec) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+
+--------------------------------------------------------------------
+One example where priority_queue is better suited than sorting is in the problem of finding the kth largest (or smallest)
+element in an array or a stream of elements. Consider the scenario where you need to find the kth largest element in an array of integers. 
+If you use sorting, you would need to sort the entire array, which has a time complexity of O(n log n) for most sorting algorithms. 
+However, if you use a priority_queue, you can efficiently find the kth largest element with a time complexity of O(n log k).
+
+#include <iostream>
+#include <queue>
+#include <vector>
+
+int findKthLargest(std::vector<int>& nums, int k) {
+    std::priority_queue<int, std::vector<int>, std::greater<int>> pq;
+
+    for (int num : nums) {
+        pq.push(num);
+        if (pq.size() > k) {
+            pq.pop();
+        }
+    }
+
+    return pq.top();
+}
+
+int main() {
+    std::vector<int> nums = {3, 1, 6, 2, 4, 9};
+    int k = 3;
+    int kthLargest = findKthLargest(nums, k);
+
+    std::cout << "The " << k << "th largest element is: " << kthLargest << std::endl;
+
+    return 0;
+}
+
+/*
+If I want 3 smallest elements in a PQ, I would insert them one by one in the PQ
+and pop the 4th element each time. Because when we insert the 4th element, the 
+PQ will have the largest element on top. When we pop it, we will always have the
+currently 3 smallest elements in the queue (in descending order).
+
+If I want 3 largest elements in a PQ, I would have to first convert from max heap
+(descending) to min heap (ascending). And then follow the same process. Now after each 
+4th element insertion, the PQ will have the smallest element on top and when we pop
+it we will always have the 3 currently greatest elements in the queue (in ascending order).
+
+We can accomplish the same things in a more straight forward way by sorting but that 
+would result in a complexity of O(nlogn) while using the PQ approach results in
+a complexity of O(nlogk).
+*/
