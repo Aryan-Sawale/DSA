@@ -54,6 +54,26 @@ int main()
     cout << obj.isAnagram(s, t);
 }
 
+// cleaner code
+bool isAnagram(string s, string t)
+{
+  unordered_map<char, int> umap1;
+  unordered_map<char, int> umap2;
+
+  if (s.size() != t.size()) return false;
+
+  for (auto& it : s)
+  {
+    umap1[it]++;
+  }
+
+  for (auto& it : t)
+  {
+    umap2[it]++;
+  }
+
+   return umap1 == umap2;
+}
 
 // Assuming we only deal with alphabets, we can use a 26 sized frequency array instead
 // now time = O(n) and space = O(1)

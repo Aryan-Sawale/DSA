@@ -369,6 +369,8 @@ int main() {
 }
 
 /*
+(intiuitive way to think of this problem is to consider an array from 1 to 10 and dry run)
+
 If I want 3 smallest elements in a PQ, I would insert them one by one in the PQ
 and pop the 4th element each time. Because when we insert the 4th element, the 
 PQ will have the largest element on top. When we pop it, we will always have the

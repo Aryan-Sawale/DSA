@@ -4,22 +4,22 @@ using namespace std;
 
 class Solution {
 public:
-    bool containsDuplicate(vector<int>& nums) 
-    //pass by reference
-    //use same for for (auto& it : vector)
+    bool containsDuplicate4(vector<int> &nums)
     {
-        bool flag = false;
-        for (int i = 0; i < nums.size(); i++)
-        {
-            for (int j = i + 1; j < nums.size(); j++)
-            {
-                if (nums[i] == nums[j])
-                {
-                    flag = true;
-                }
-            }
-        }
-        return flag;
+        // unordered_set<int> s;
+        // for (auto& itr : nums)
+        // {
+        //     s.insert(itr);
+        // }
+        
+        // if (s.size() == nums.size())
+        // {
+        //     return false;
+        // }
+
+        // return true; 
+        unordered_set<int> s(nums.begin(), nums.end());
+        return (s.size() != nums.size());
     }
 };
 
@@ -27,12 +27,29 @@ int main()
 {
     vector<int> nums = {1, 2, 3, 1};
     Solution obj;
-    cout << obj.containsDuplicate(nums);
+    cout << obj.containsDuplicate4(nums);
 }
 
+bool containsDuplicate(vector<int>& nums) 
+//pass by reference
+//use same for for (auto& it : vector)
+{
+    bool flag = false;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        for (int j = i + 1; j < nums.size(); j++)
+        {
+            if (nums[i] == nums[j])
+            {
+                flag = true;
+            }
+        }
+    }
+    return flag;
+}
 // Time: O(n^2)
 // Space: O(1)  
-
+    
 
 bool containsDuplicate2(vector<int> &nums)
 {
