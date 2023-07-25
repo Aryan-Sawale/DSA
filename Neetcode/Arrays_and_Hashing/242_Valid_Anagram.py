@@ -44,6 +44,7 @@ def isAnagram(s, t):
   # without the (key not in dict2) condition, (dict1[key] != dict2[key]) will raise a key error when the strings are not anagrams.
   # when you use (condition1) or (condition2), then condition2 is not evaluated if condition1 is true. This can be used to avoid errors.
   # If we had written (dict1[key] != dict2[key]) or (key not in dict2) then the first condition would have been evaluated and raised an error.
-  
+  # All of this can be overcome with defaultdict
+
   return True
 """
