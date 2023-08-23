@@ -2,25 +2,74 @@
 
 using namespace std;
 
+string encode(vector<string> &strs) 
+{
+  string coded;
+  long long size = strs.size();
+  for (int i = 0; i < size; i++)
+  {
+    if (i == size - 1)
+    {
+      coded += strs[i];
+      continue;
+    }
+
+    coded += strs[i] + "\n";
+  }
+  return coded;
+}
+
+// if you don't remember <sstream> etc.
+vector<string> decode2(string &str) 
+{
+  char delimiter = '\n';
+  vector<string> decoded;
+  string temp;
+  int size = str.size();
+  for (int i = 0; i < size; i++)
+  {
+    if (str[i] != '\n')
+    {
+      if (i == size - 1)
+      {
+        temp.push_back(str[i]);
+        decoded.push_back(temp);
+        continue;
+      }
+      temp.push_back(str[i]);
+    }
+    else
+    {
+      decoded.push_back(temp);
+      temp = "";
+    }
+  }
+  return decoded;
+}
+
+vector<string> decode(string &str) 
+{
+  char delimiter = '\n';
+  stringstream ss(str);
+  vector<string> decoded;
+  string temp;
+  while (getline(ss, temp, delimiter))
+  {
+    decoded.push_back(temp) ;
+  }
+
+  return decoded;
+}
+
 int main()
 {
-      // Declare the vector
-    vector<int> arr = { 1, 2, 3, 4 };
-
-    cout << "Vector Before Update: ";
-    for (auto it : arr) {
-        cout << it << ' ';
-    }
-  
-    // Traverse using the reference to value
-    // and multiply each value by 2
-    for (auto it : arr) {
-        it *= 2;
-    }
-  
-    cout << "\nVector After Update: ";
-    // Print vector elements
-    for (auto it : arr) {
-        cout << it << ' ';
-    }
+  vector<string> packet = {"lint","code","love","you"};
+  string coded = encode(packet);
+  cout << coded << endl;
+  vector<string> decoded = decode2(coded);
+  for (auto& it : decoded)
+  {
+    cout << it << " ";
+  }
 }
+

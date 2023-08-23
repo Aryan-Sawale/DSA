@@ -38,7 +38,7 @@ int main()
     cout <<"["<<result[0]<<","<<result[1]<<"]";
 }
 
-// Alternate way for same logic
+// Alternate way for same logic (preferred for simplicity)
 vector<int> twoSum(vector<int> nums, int target)
 {
   unordered_map<int, int> umap;

@@ -19,33 +19,7 @@ string encode(vector<string> &strs)
   return coded;
 }
 
-vector<string> decode(string &str) 
-{
-  char delimiter = '\n';
-  stringstream ss(str);
-  vector<string> decoded;
-  string temp;
-  while (getline(ss, temp, delimiter))
-  {
-    decoded.push_back(temp) ;
-  }
-
-  return decoded;
-}
-
-int main()
-{
-  vector<string> packet = {"lint","code","love","you"};
-  string coded = encode(packet);
-  cout << coded << endl;
-  vector<string> decoded = decode(coded);
-  for (auto& it : decoded)
-  {
-    cout << it << " ";
-  }
-}
-
-// if you don't remember <sstream>
+// if you don't remember <sstream> etc.
 vector<string> decode2(string &str) 
 {
   char delimiter = '\n';
@@ -70,5 +44,32 @@ vector<string> decode2(string &str)
       temp = "";
     }
   }
+  return decoded;
+}
+
+
+int main()
+{
+  vector<string> packet = {"lint","code","love","you"};
+  string coded = encode(packet);
+  cout << coded << endl;
+  vector<string> decoded = decode2(coded);
+  for (auto& it : decoded)
+  {
+    cout << it << " ";
+  }
+}
+
+vector<string> decode(string &str) 
+{
+  char delimiter = '\n';
+  stringstream ss(str);
+  vector<string> decoded;
+  string temp;
+  while (getline(ss, temp, delimiter))
+  {
+    decoded.push_back(temp) ;
+  }
+
   return decoded;
 }
