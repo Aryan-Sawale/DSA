@@ -10,7 +10,8 @@ vector<vector<int>> threeSum(vector<int>& nums)
   
   for (int i = 0; i < size; i++)
   {
-    // remove duplicate triplets due to duplicate elements.
+    // remove duplicate triplets due to duplicate answers.
+    // But always process the first element of a duplicate chain
     // start checking from i = 1 to avoid out of bounds
     if (i != 0 && nums[i] == nums[i-1]) continue;
 

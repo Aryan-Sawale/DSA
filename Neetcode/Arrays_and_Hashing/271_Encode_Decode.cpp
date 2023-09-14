@@ -19,7 +19,7 @@ string encode(vector<string> &strs)
   return coded;
 }
 
-// if you don't remember <sstream> etc.
+// if you don't remember stringstream etc.
 vector<string> decode2(string &str) 
 {
   char delimiter = '\n';

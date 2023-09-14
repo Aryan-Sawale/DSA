@@ -2,74 +2,66 @@
 
 using namespace std;
 
-string encode(vector<string> &strs) 
+vector<vector<int>> threeSum(vector<int>& nums) 
 {
-  string coded;
-  long long size = strs.size();
+  int size = nums.size();
+  sort(nums.begin(), nums.end());
+  vector<vector<int>> result;
+  
   for (int i = 0; i < size; i++)
   {
-    if (i == size - 1)
-    {
-      coded += strs[i];
-      continue;
-    }
+    // remove duplicate triplets due to duplicate elements.
+    // start checking from i = 1 to avoid out of bounds
+    if (i != 0 && nums[i] == nums[i-1]) continue;
 
-    coded += strs[i] + "\n";
-  }
-  return coded;
-}
-
-// if you don't remember <sstream> etc.
-vector<string> decode2(string &str) 
-{
-  char delimiter = '\n';
-  vector<string> decoded;
-  string temp;
-  int size = str.size();
-  for (int i = 0; i < size; i++)
-  {
-    if (str[i] != '\n')
+    int twosum = 0 - nums[i];
+    int left = i + 1, right = size - 1;
+    while (left < right)
     {
-      if (i == size - 1)
+      int sum = nums[left] + nums[right];
+      if (sum > twosum)
       {
-        temp.push_back(str[i]);
-        decoded.push_back(temp);
-        continue;
+        right--;
       }
-      temp.push_back(str[i]);
-    }
-    else
-    {
-      decoded.push_back(temp);
-      temp = "";
+      if (sum < twosum)
+      {
+        left++;
+      }
+      if (sum == twosum)
+      {
+        result.push_back({nums[i], nums[left], nums[right]});
+
+        // covering case where there might be duplicates of answer elements
+        while (left < right)
+        {
+          if (nums[right - 1] == nums[right]) 
+          {
+            right--;
+          }
+          else 
+          {
+            right--;
+            break;
+          }
+        }
+        
+      }
     }
   }
-  return decoded;
-}
 
-vector<string> decode(string &str) 
-{
-  char delimiter = '\n';
-  stringstream ss(str);
-  vector<string> decoded;
-  string temp;
-  while (getline(ss, temp, delimiter))
-  {
-    decoded.push_back(temp) ;
-  }
-
-  return decoded;
+  return result;
 }
 
 int main()
 {
-  vector<string> packet = {"lint","code","love","you"};
-  string coded = encode(packet);
-  cout << coded << endl;
-  vector<string> decoded = decode2(coded);
-  for (auto& it : decoded)
+  vector<int> nums = {0, 0, 0};
+  vector<vector<int>> result = threeSum(nums);
+  for (auto& it : result)
   {
-    cout << it << " ";
+    for (auto& it2 : it)
+    {
+      cout << it2 << " ";
+    }
+    cout<<endl;
   }
 }
-
