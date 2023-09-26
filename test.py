@@ -1,21 +1,46 @@
-height = [4,2,0,3,2,5]
+given = "2020/12/26"
 
-def rainwater(height):
-    size = len(height)
-    leftMax = [0]*size
-    rightMax = [0]*size
-    ans = [0]*size
+def convert(given):
+  splitArr = given.split("/")
+  DD = splitArr[2] #add check for date
+  MM = splitArr[1]
+  YY = splitArr[0]
 
-    for i in range(1, size):
-        leftMax[i] = max(leftMax[i-1], height[i-1])
+  MMnum = int(MM)
 
-    for i in range(size - 2, -1, -1):
-        rightMax[i] = max(rightMax[i+1], height[i+1])
+  if (MMnum < 1 or MMnum > 12):
+    return "Invalid"
+  
+  if (MMnum == 1):
+    MM = "January"
+  elif (MMnum == 2):
+    MM = "February"
+  elif (MMnum == 3):
+    MM = "March"
+  elif (MMnum == 4):
+    MM = "April"
+  elif (MMnum == 5):
+    MM = "May"
+  elif (MMnum == 6):
+    MM = "June"
+  elif (MMnum == 7):
+    MM = "July"
+  elif (MMnum == 8):
+    MM = "August"
+  elif (MMnum == 9):
+    MM = "September"
+  elif (MMnum == 10):
+    MM = "October"
+  elif (MMnum == 11):
+    MM = "November"
+  elif (MMnum == 12):
+    MM = "Decemeber"
+  
+  newArr = [DD, MM, YY]
+  finalDate = "/".join(newArr)
 
-    for i in range(size):
-        water = min(leftMax[i], rightMax[i]) - height[i]
-        if (water > 0): ans[i] = water
+  return finalDate
 
-    return sum(ans) 
-
-print(rainwater(height))
+hello = "hello"
+len(hello)
+print("hello"[:-2])
