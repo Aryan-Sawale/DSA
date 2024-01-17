@@ -1,46 +1,21 @@
-given = "2020/12/26"
+arr = [2, 3, 5, 1, 6, 9, 13]
 
-def convert(given):
-  splitArr = given.split("/")
-  DD = splitArr[2] #add check for date
-  MM = splitArr[1]
-  YY = splitArr[0]
+def sortByDivisibility(arr):
+  list1 = []
+  list2 = []
 
-  MMnum = int(MM)
+  for i in range(len(arr)):
+    if (arr[i] % 3 == 0):
+      list1.append(arr[i])
+    else:
+      list2.append(arr[i])
 
-  if (MMnum < 1 or MMnum > 12):
-    return "Invalid"
-  
-  if (MMnum == 1):
-    MM = "January"
-  elif (MMnum == 2):
-    MM = "February"
-  elif (MMnum == 3):
-    MM = "March"
-  elif (MMnum == 4):
-    MM = "April"
-  elif (MMnum == 5):
-    MM = "May"
-  elif (MMnum == 6):
-    MM = "June"
-  elif (MMnum == 7):
-    MM = "July"
-  elif (MMnum == 8):
-    MM = "August"
-  elif (MMnum == 9):
-    MM = "September"
-  elif (MMnum == 10):
-    MM = "October"
-  elif (MMnum == 11):
-    MM = "November"
-  elif (MMnum == 12):
-    MM = "Decemeber"
-  
-  newArr = [DD, MM, YY]
-  finalDate = "/".join(newArr)
+  list1.sort()
+  list2.sort()
 
-  return finalDate
+  return list1 + list2
 
-hello = "hello"
-len(hello)
-print("hello"[:-2])
+# O(nlogn) O(n)
+
+
+print(sortByDivisibility(arr))

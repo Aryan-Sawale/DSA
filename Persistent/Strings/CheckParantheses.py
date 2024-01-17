@@ -12,7 +12,7 @@ def checkPar(key):
       stack.append(key[i])
 
     if (key[i] == "}"):
-      if (stack.pop() == "{"):
+      if (stack.pop() == "{"): #can also use stack[-1]
         continue
       else:
         flag = False

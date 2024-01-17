@@ -1,0 +1,4 @@
+We have 50 students(STUD) in class that are randomly arranged. First sort the data then write a query to find the name of the students(STUD_NAME) between 20 to 40(STUD_ROLLNO) that have their father's name(STUD_FATHERNAME) starting with "A"
+
+My ans
+SELECT STUD_NAME FROM (SELECT * FROM STUD ORDER BY STUD_ROLLNO) WHERE (STUD_ROLLNO > 20 AND STUD_ROLLNO < 40) AND STUD_FATHERNAME LIKE "A%;

@@ -1,6 +1,7 @@
-import collections
+from collections import defaultdict
 
 strings = ["eat","tea","tan","ate","nat","bat"]
+
 def groupAnagrams(strings):
     dict = {}
     results = []
@@ -20,6 +21,24 @@ for i in range(len(results)):
         print(results[i][j], end=" ")
     print()
 # print gives a newline by default, this can be modified by end=
+
+
+'''
+# The .get() shpeel can be avoided with defaultdict
+
+def groupAnagrams(strings):
+    dict = defaultdict(list)
+    results = []
+    for i in range(len(strings)):
+        key = ''.join(sorted(strings[i]))
+        dict[key].append(strings[i])
+
+    for key in dict:
+        results.append(dict[key])
+
+    return results
+
+'''
 
 '''
 # This one has better theoretical complexity (O(n*m)) but leads to lower actual performance for some reason

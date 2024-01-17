@@ -2,6 +2,7 @@
 
 using namespace std;
 
+// O(n) O(n)
 int factorial(int key)
 {
   int result = key;
@@ -14,6 +15,7 @@ int factorial(int key)
   // key * key - 1 * key - 2 ... 1
 }
 
+// O(n) O(n) (call stack)
 int factorialRecursive(int key)
 {
   if (key == 1 || key == 0)  //take care of 0 also, if user enters 0
