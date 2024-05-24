@@ -1,0 +1,38 @@
+https://www.interviewbit.com/c-programming-mcq/
+
+12)
+#include <stdio.h>
+int main() {
+    int x = printf("Hello");
+    printf(" %d", x);
+}
+
+The printf function returns the number of characters printed to the standard output, which here is 5.
+
+13)
+struct {
+    type member_name : width;
+} variable_name;
+
+struct {
+    int x : 8;
+} data;
+
+In this example, data.x is a bit-field of type int with 8 bits. 
+(The question is wrong on the site, this is the corrected version)
+
+15)
+Do-while loop is an exit controlled loop.
+(others are entry controlled i.e check condition on entry)
+
+22)
+printf("%d %d", (023), (23));
+
+23 is printed as it is. 023 is interpreted as an octal number which is equivalent to decimal 19.
+
+#
+0b1010 is binary
+0xA is hex
+023 is octal
+
+023 = 2 * 8^1 + 3 * 8^0 = 19

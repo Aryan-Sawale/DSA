@@ -3,12 +3,15 @@
 using namespace std;
 
 // Function to check if a number is palindrome
-bool isPalindrome(int number) {
+bool isPalindrome(int number)
+{
     string numString = to_string(number);
     int start = 0;
     int end = numString.length() - 1;
-    while (start < end) {
-        if (numString[start] != numString[end]) {
+    while (start < end)
+    {
+        if (numString[start] != numString[end])
+        {
             return false;
         }
         start++;
@@ -18,13 +21,16 @@ bool isPalindrome(int number) {
 }
 
 // Function to perform the given operations
-int findPalindrome(int number) {
-    while (true) {
+int findPalindrome(int number)
+{
+    while (true)
+    {
         // Add the number and its reverse
         int sum = number + stoi(string(to_string(number).rbegin(), to_string(number).rend()));
 
         // Check if the sum is a palindrome
-        if (isPalindrome(sum)) {
+        if (isPalindrome(sum))
+        {
             return sum;
         }
 
@@ -33,7 +39,8 @@ int findPalindrome(int number) {
     }
 }
 
-int main() {
+int main()
+{
     int number;
     cout << "Enter an integer: ";
     cin >> number;

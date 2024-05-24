@@ -1,0 +1,3 @@
+C/C++ basics 
+patterns
+question from KPIT and DSA
