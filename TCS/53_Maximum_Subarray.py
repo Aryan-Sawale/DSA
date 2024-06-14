@@ -11,7 +11,7 @@ def MaxSubarray(nums):
         for j in range(i, len(nums)):
             ptr = i
             sum = 0
-            for k in range(j - i + 1):
+            while ptr <= j:
                 sum += nums[ptr]
                 ptr += 1
             maxSum = max(maxSum, sum)
@@ -35,6 +35,7 @@ def MaxSubarray2(nums):
 # optimal o(n)
 # Intuition: we don't want to carry forward a negative sum of the current subarray
 # If negative is found, we reset the starting position of subarray to the next position (by setting sum to 0)
+# Kadane's algo
 def MaxSubarray3(nums):
     maxSum = -sys.maxsize - 1
     sum = 0
@@ -45,6 +46,8 @@ def MaxSubarray3(nums):
 
         if sum < 0:
             sum = 0
+
+    return maxSum
 
 
 # With index tracking
@@ -65,6 +68,8 @@ def MaxSubarray4(nums):
 
         if sum < 0:
             sum = 0
+
+    return startInd, endInd, maxSum
 
 
 print(MaxSubarray2(nums))

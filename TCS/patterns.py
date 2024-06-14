@@ -35,6 +35,7 @@ def pat5(n):
             print()
         else:
             # 9 - 9 + 1, 9 - 8 + 1 (from end) = ((2 * n) - 1) - (i + 1) + 1
+            # (2n - 1) - row + 1
             for j in range(2 * n - (i + 1)):
                 print("*", end="")
             print()
@@ -202,7 +203,7 @@ def pat12(n):
 # this approach is hacky beacuse of extra space in 2nd pattern
 # first n => pat 10
 # rest n - 1 => pat 11 (modified where i = i - n and n = n - 1)
-def pat28(n):
+def pat28a(n):
     for i in range(2 * n - 1):
         if i < n:
             # n - row
@@ -235,7 +236,7 @@ def pat28(n):
 # 2n - 1 rows
 # first n => n - row spaces, row entities
 # next n - 1 => row - n spaces, 2n - row entities
-def pat28(n):
+def pat28b(n):
     for i in range((2 * n) - 1):
         if i < n:
             for j in range(n - (i + 1)):
@@ -250,5 +251,94 @@ def pat28(n):
         print()
 
 
-# 17, 18, 31, 32
-pat28(5)
+# 17, 18, 21, 31, 32
+
+
+# 2n - 1 rows
+# till row < n + 1
+# n - row spaces
+# row to 1 print j
+# 2 to row print j
+# second part
+# row - n spaces
+# key = (2n - 1) - row + 1, key to 1 print i, 2 to key print j
+def pat17(n):
+    for i in range(2 * n - 1):
+        if i < n:
+            for j in range(n - (i + 1)):
+                print(" ", end="")
+            for j in range((i + 1), 0, -1):
+                print(j, end="")
+            for j in range(2, (i + 1) + 1):
+                print(j, end="")
+        else:
+            for j in range((i + 1) - n):
+                print(" ", end="")
+            key = (2 * n - 1) - (i + 1) + 1
+            for j in range(key, 0, -1):
+                print(j, end="")
+            for j in range(2, key + 1):
+                print(j, end="")
+        print()
+
+
+# 2n - 1 rows, 2n - 1 cols
+# number dependant on min distance from boundary
+# boundaries => 1st row, 1st col, last row, last col
+# dist = min(row - 1, col - 1, (2n - 2) - row, (2n - 2) - col)
+# number for dist 0 = n - 0, dist 1 = n - 1 => n - dist
+def pat31(n):
+    for i in range(2 * n - 1):
+        for j in range(2 * n - 1):
+            dist = min(
+                (i + 1) - 1, (j + 1) - 1, (2 * n - 1) - (i + 1), (2 * n - 1) - (j + 1)
+            )
+            print(n - dist, end=" ")
+        print()
+
+
+# n rows, row cols
+# max_char => A + (n - 1)
+# start_char on each row  => max_char - (row - 1)
+def pat32(n):
+    max_char = ord("A") + (n - 1)
+
+    for i in range(n):
+        start_char = max_char - ((i + 1) - 1)
+        for j in range(i + 1):
+            print(chr(start_char + j), end=" ")
+        print()
+
+
+def pat33(rows):
+    # Initialize the first character to 'a'
+    current_char = ord("a")
+
+    for i in range(1, rows + 1):
+        for j in range(i):
+            # Print the current character with the correct case
+            if (current_char - ord("a")) % 2 == 0:
+                print(chr(current_char).lower(), end=" ")
+            else:
+                print(chr(current_char).upper(), end=" ")
+
+            # Move to the next character
+            current_char += 1
+
+        # Move to the next line
+        print()
+
+
+def pat21(rows):
+    num = 1
+    for i in range(1, rows + 1):
+        # Print numbers for the current row
+        for j in range(i):
+            print(num, end=" ")
+            num += 1
+
+        # Move to the next line
+        print()
+
+
+pat32(5)

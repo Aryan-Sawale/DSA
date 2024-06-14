@@ -1,0 +1,5 @@
+A B-Tree is a self-balancing tree data structure that maintains sorted data and allows searches, 
+sequential access, insertions, and deletions in logarithmic time. It generalizes the BST by allowing more than two children.
+
+A B+ Tree is an extension of the B-Tree that provides a structure optimized for systems that read and write large blocks of data. 
+It maintains all data at the leaf nodes and only keeps keys in the internal nodes.
