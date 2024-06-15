@@ -1,18 +1,28 @@
-#include <bits/stdc++.h>
+#include <iostream>
 
 using namespace std;
 
-class A {
-    public:
-        int data;
-        A()
-        {
-            data = 9;
-        }
+class Test
+{
+public:
+    Test(int a)
+    {
+        cout << a << endl;
+        cout << "Test Constructor called" << endl;
+    }
 };
 
-int main() {
-   A bruh;
-   bruh.data = 8;
-   cout << bruh.data;
+int main()
+{
+    Test *t = new Test(10); // Dynamically allocate a Test object
+    if (t)
+    {
+        cout << "Object created successfully." << endl;
+    }
+    else
+    {
+        cout << "Failed to create object." << endl;
+    }
+    delete t; // Free the allocated memory
+    return 0;
 }

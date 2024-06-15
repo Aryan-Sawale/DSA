@@ -24,19 +24,22 @@ class Graph:
                     queue.append(neighbor)
                     visited[neighbor] = True
 
-    def DFS(self, s):
+    def DFSUtil(self, v, visited):
+        # Mark the current node as visited and print it
+        visited[v] = True
+        print(v, end=" ")
+
+        # Recur for all the vertices adjacent to this vertex
+        for neighbor in self.adj[v]:
+            if not visited[neighbor]:
+                self.DFSUtil(neighbor, visited)
+
+    def DFS(self, v):
+        # Mark all the vertices as not visited
         visited = [False] * self.V
-        stack = [s]
 
-        while stack:
-            node = stack.pop()
-            if not visited[node]:
-                print(node, end=" ")
-                visited[node] = True
-
-                for neighbor in reversed(self.adj[node]):
-                    if not visited[neighbor]:
-                        stack.append(neighbor)
+        # Call the recursive helper function to print DFS traversal
+        self.DFSUtil(v, visited)
 
 
 # Example usage
