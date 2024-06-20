@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-int main() {
+int main()
+{
   float t, v;
   printf("Temperature: ");
   scanf("%f", &t);

@@ -21,7 +21,7 @@ void bubblesort(int arr[], int n)
   }
 }
 
-bool containsDuplicate(int* nums, int numSize)
+bool containsDuplicate(int *nums, int numSize)
 {
   bubblesort(nums, numSize);
 

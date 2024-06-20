@@ -17,6 +17,10 @@ def LCSutil(text1, text2, ind1, ind2, dp):
     if ind1 < 0 or ind2 < 0:
         return 0
 
+    # If the result for this state is already calculated, return it
+    if dp[ind1][ind2] != -1:
+        return dp[ind1][ind2]
+
     if text1[ind1] == text2[ind2]:
         dp[ind1][ind2] = 1 + LCSutil(text1, text2, ind1 - 1, ind2 - 1, dp)
 
