@@ -1,0 +1,25 @@
+// ASSIGNMENT 2
+// take int and print number of 1s (in binary rep) using bit operators
+
+// take int and reverse number using bit operators
+// consider 32-bit number
+// e.g 7 => 29 0s and 3 1s
+// reverse -> 3 1s and 29 0s
+
+// set a particular bit in an integer
+// reset a particular bit in an integer
+// toggle that bit
+// e.g toggle 3rd bit
+
+// ASSIGNMENT 3
+// arr of 100-200 chars or file
+// search for "abababc"
+// On matching skip 2 bytes, check 3rd byte
+// if it's n => print name
+// if it's a => print age
+// if it's s => print sky
+// if it's none of these => print error then go ahead
+// if you find substring at end and if there aren't 3 bytes ahead of it => print overflow
+// if no substring is found => print not found
+// For multiple occurrences, print all 
+// "abababchjn abababcsda abababcsds abababcpol abababc"

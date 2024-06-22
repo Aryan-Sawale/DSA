@@ -9,6 +9,8 @@ int32_t reverse_number(int32_t n);
 int32_t set_bit(int32_t n, int pos);
 int32_t reset_bit(int32_t n, int pos);
 int32_t toggle_bit(int32_t n, int pos);
+
+// helper functions
 void int_to_binary(int32_t n, char *binary);
 int32_t binary_to_int(char *binary);
 
@@ -27,7 +29,7 @@ int main()
   }
   binary[NUMBER_WIDTH] = '\0';
   int_to_binary(n, binary);
-  printf("Binary Representation: %s \n", binary);
+  printf("\nBinary Representation: %s \n", binary);
 
   // displaying number of set bits in given number
   int set_bits = count_set_bits(n);
@@ -42,16 +44,16 @@ int main()
   reversed_binary[NUMBER_WIDTH] = '\0';
   int32_t reversed = reverse_number(n);
   int_to_binary(reversed, reversed_binary);
-  printf("Reversed Binary Representation: %s\n", reversed_binary);
+  printf("\nReversed Binary Representation: %s\n", reversed_binary);
   printf("Reversed number: %d\n", reversed);
 
   int pos;
-  printf("Enter position to be set, reset, and toggled (1 to 32): ");
+  printf("\nEnter position to be set, reset, and toggled (1 to 32): ");
   scanf("%d", &pos);
 
-  if (pos >= 32 || pos < 0)
+  if (pos >= 32 || pos < 1)
   {
-    printf("Please enter a valid position (0 to 31)\n");
+    printf("Please enter a valid position (1 to 32)\n");
     return 1;
   }
 
@@ -64,7 +66,7 @@ int main()
   }
   set_binary[NUMBER_WIDTH] = '\0';
   int_to_binary(set, set_binary);
-  printf("Binary after setting bit %d: %s\n", pos, set_binary);
+  printf("\nBinary after setting bit %d: %s\n", pos, set_binary);
   printf("Number after setting bit %d: %d\n", pos, set);
 
   // displaying binary and integer form after resetting
@@ -76,7 +78,7 @@ int main()
   }
   reset_binary[NUMBER_WIDTH] = '\0';
   int_to_binary(reset, reset_binary);
-  printf("Binary after resetting bit %d: %s\n", pos, reset_binary);
+  printf("\nBinary after resetting bit %d: %s\n", pos, reset_binary);
   printf("Number after resetting bit %d: %d\n", pos, reset);
 
   // displaying binary and integer form after toggling
@@ -88,7 +90,7 @@ int main()
   }
   toggled_binary[NUMBER_WIDTH] = '\0';
   int_to_binary(toggled, toggled_binary);
-  printf("Binary after toggling bit %d: %s\n", pos, toggled_binary);
+  printf("\nBinary after toggling bit %d: %s\n", pos, toggled_binary);
   printf("Number after toggling bit %d: %d\n", pos, toggled);
 
   return 0;
@@ -96,7 +98,6 @@ int main()
 
 int count_set_bits(int32_t n)
 {
-
   int counter = 0;
   for (int i = 0; i < NUMBER_WIDTH; i++)
   {
@@ -110,6 +111,7 @@ int count_set_bits(int32_t n)
 
 int32_t reverse_number(int32_t n)
 {
+
   int32_t reversed = 0;
   for (int i = 0; i < NUMBER_WIDTH; i++)
   {
