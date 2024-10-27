@@ -1,28 +1,50 @@
-#include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-class Test
+void print_iters(string word, vector<char> letters, int choice)
 {
-public:
-    Test(int a)
+    int m = 0, n = 0;
+    if (choice == 1)
     {
-        cout << a << endl;
-        cout << "Test Constructor called" << endl;
+        m = 0;
+        n = 4;
     }
-};
+    if (choice == 2)
+    {
+        m = 0;
+        n = 2;
+    }
+    // if (choice == 3)
+    //     m = 0;
 
+    // for (auto i = letters.begin(); i < letters.end(); i++)
+    // {
+    //     word[m] = *i;
+    //     Myfile << word << "\n";
+    // }
+
+    for (auto i = letters.begin(); i < letters.end(); i++)
+    {
+        word[m] = *i;
+        for (auto j = letters.begin(); j < letters.end(); j++)
+        {
+            word[n] = *j;
+            cout << word << "\n";
+        }
+    }
+}
 int main()
 {
-    Test *t = new Test(10); // Dynamically allocate a Test object
-    if (t)
-    {
-        cout << "Object created successfully." << endl;
-    }
-    else
-    {
-        cout << "Failed to create object." << endl;
-    }
-    delete t; // Free the allocated memory
-    return 0;
+    vector<char> letters = {'Q', 'W', 'R', 'Y', 'O', 'A', 'F', 'G', 'J', 'K', 'Z', 'X', 'V', 'B'};
+    string word1 = "WORAN";
+    string word2 = "WOMAR";
+    string word3 = "PURGE";
+
+    print_iters(word1, letters, 1);
+    cout << "\n\n";
+    print_iters(word2, letters, 2);
+    cout << "\n\n";
+    // print_iters(word3, letters, Myfile, 3);
+    // Myfile << "\n\n";
 }
