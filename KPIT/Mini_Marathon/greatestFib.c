@@ -31,7 +31,7 @@ int main()
   if (num < 0)
   {
     printf("Negative numbers not allowed\n");
-    exit(1);
+    return 1;
   }
 
   int result = greatestFib(num);

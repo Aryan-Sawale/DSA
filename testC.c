@@ -41,11 +41,7 @@
 
 #include <stdio.h>
 
-func()
-{
-    return 7;
-}
 int main()
 {
-    printf("%d\n", func());
+    printf("%d", 2 >> -2);
 }
