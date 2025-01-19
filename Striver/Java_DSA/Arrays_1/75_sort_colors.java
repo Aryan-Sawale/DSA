@@ -1,7 +1,6 @@
 import java.util.*;
 
-public class SortColors
-{
+class SortColors {
 
     // There are 3 pointers: low, mid and high
     // 1. arr[0] to arr[low - 1] must only contain 0s
@@ -14,18 +13,15 @@ public class SortColors
     // 2) if arr[mid] == 0, swap arr[low] and arr[mid], then low++ and mid++
     // 3) if arr[mid] == 1, mid++
     // 4) if arr[mid] == 2, swap arr[mid] and arr[high], then high--
-    public static void dutchNationalFlag(int[] nums)
-    {
+    public static void dutchNationalFlag(int[] nums) {
         int length = nums.length;
 
         int low = 0;
         int mid = 0;
         int high = length - 1;
 
-        while (mid <= high)
-        {
-            if (nums[mid] == 0)
-            {
+        while (mid <= high) {
+            if (nums[mid] == 0) {
                 int temp = nums[low];
                 nums[low] = nums[mid];
                 nums[mid] = temp;
@@ -34,13 +30,11 @@ public class SortColors
                 mid++;
             }
 
-            else if (nums[mid] == 1)
-            {
+            else if (nums[mid] == 1) {
                 mid++;
             }
 
-            else if (nums[mid] == 2)
-            {
+            else if (nums[mid] == 2) {
                 int temp = nums[mid];
                 nums[mid] = nums[high];
                 nums[high] = temp;
@@ -52,55 +46,46 @@ public class SortColors
         System.out.println(Arrays.toString(nums));
     }
 
-    public static void sortColors(int[] nums)
-    {
+    public static void sortColors(int[] nums) {
         int zeroCount = 0;
         int oneCount = 0;
         int twoCount = 0;
-        
+
         int length = nums.length;
-        
-        for (int i = 0; i < length; i++)
-        {
-            if (nums[i] == 0)
-            {
+
+        for (int i = 0; i < length; i++) {
+            if (nums[i] == 0) {
                 zeroCount++;
             }
 
-            if (nums[i] == 1)
-            {
+            if (nums[i] == 1) {
                 oneCount++;
             }
 
-            if (nums[i] == 2)
-            {
+            if (nums[i] == 2) {
                 twoCount++;
             }
 
         }
 
-        for (int i = 0; i < zeroCount; i++)
-        {
+        for (int i = 0; i < zeroCount; i++) {
             nums[i] = 0;
         }
 
-        for (int i = zeroCount; i < zeroCount + oneCount; i++)
-        {
+        for (int i = zeroCount; i < zeroCount + oneCount; i++) {
             nums[i] = 1;
         }
 
-        for (int i = zeroCount + oneCount; i < zeroCount + oneCount + twoCount; i++)
-        {
+        for (int i = zeroCount + oneCount; i < zeroCount + oneCount + twoCount; i++) {
             nums[i] = 2;
         }
 
         System.out.println(Arrays.toString(nums));
 
-    }   
+    }
 
-    public static void main(String[] args)
-    {
-        int nums[] = {2, 0, 2, 1, 1, 0};
+    public static void main(String[] args) {
+        int nums[] = { 2, 0, 2, 1, 1, 0 };
         sortColors(nums);
         dutchNationalFlag(nums);
     }
